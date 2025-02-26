@@ -1,6 +1,7 @@
 ---
 title: 'Everything new in Astro Micro'
 description: 'Features, enhancements, and changes.'
+category: ['React', 'MongoDB', 'MERN']
 date: '2024-05-09'
 ---
 
