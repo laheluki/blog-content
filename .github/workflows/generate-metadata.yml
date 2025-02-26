@@ -1,0 +1,33 @@
+name: Generate Metadata
+
+on:
+  push:
+    paths:
+      - 'blog/*.md'
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install Dependencies
+        run: npm install gray-matter
+
+      - name: Generate metadata.json
+        run: node scripts/generateMetadata.js
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "laheluki"
+          git config --global user.email "rifkisaputra225@gmail.com"
+          git add blog/metadata.json
+          git commit -m "Auto-update metadata.json" || echo "No changes to commit"
+          git push
